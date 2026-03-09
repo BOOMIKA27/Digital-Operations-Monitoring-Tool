@@ -3,3 +3,6 @@ node_modules/
 dist/
 .DS_Store
 *.log
+git rm -r --cached node_modules
+git commit -m "Remove node_modules from repository"
+git push
