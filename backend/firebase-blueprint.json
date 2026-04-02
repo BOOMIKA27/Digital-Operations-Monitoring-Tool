@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "nodes": {
+      "title": "System Node",
+      "description": "Represents a single infrastructure node in the monitoring system.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the node." },
+        "name": { "type": "string", "description": "Display name of the node." },
+        "status": { "type": "string", "enum": ["Working", "Warning", "Shutdown"], "description": "Current operational status." },
+        "cpu": { "type": "number", "description": "Current CPU utilization percentage." },
+        "ram": { "type": "number", "description": "Current RAM utilization percentage." },
+        "storage": { "type": "number", "description": "Current storage utilization percentage." },
+        "region": { "type": "string", "description": "Geographic region of the node." },
+        "latency": { "type": "number", "description": "Network latency in milliseconds." },
+        "uptime": { "type": "string", "description": "Current uptime duration." },
+        "authorUid": { "type": "string", "description": "UID of the user who provisioned the node." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the node was created." }
+      },
+      "required": ["id", "name", "status", "cpu", "ram", "storage", "region", "latency", "uptime", "authorUid", "createdAt"]
+    },
+    "logs": {
+      "title": "System Log",
+      "description": "Represents a single log entry from the infrastructure.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the log entry." },
+        "timestamp": { "type": "string", "format": "date-time", "description": "Timestamp when the log was generated." },
+        "level": { "type": "string", "enum": ["Info", "Warning", "Error"], "description": "Severity level of the log." },
+        "message": { "type": "string", "description": "Log message content." },
+        "node": { "type": "string", "description": "Name of the node that generated the log." }
+      },
+      "required": ["id", "timestamp", "level", "message", "node"]
+    },
+    "users": {
+      "title": "User Profile",
+      "description": "Represents a user in the monitoring system.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID." },
+        "email": { "type": "string", "format": "email", "description": "User's email address." },
+        "displayName": { "type": "string", "description": "User's display name." },
+        "role": { "type": "string", "enum": ["Admin", "User"], "description": "User's role in the system." },
+        "photoURL": { "type": "string", "format": "uri", "description": "URL to the user's profile photo." }
+      },
+      "required": ["uid", "email", "displayName", "role"]
+    }
+  },
+  "firestore": {
+    "/nodes/{nodeId}": {
+      "schema": "nodes",
+      "description": "Collection of infrastructure nodes."
+    },
+    "/logs/{logId}": {
+      "schema": "logs",
+      "description": "Collection of system logs."
+    },
+    "/users/{userId}": {
+      "schema": "users",
+      "description": "Collection of user profiles."
+    }
+  }
+}

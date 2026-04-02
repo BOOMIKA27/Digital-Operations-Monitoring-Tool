@@ -1,0 +1,5 @@
+{
+  "name": "OpsMonitor - Digital Operations Monitoring Tool",
+  "description": "A comprehensive monitoring tool for tracking system performance, CPU, RAM, and storage with role-based access control.",
+  "requestFramePermissions": []
+}
